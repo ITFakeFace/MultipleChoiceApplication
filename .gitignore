@@ -1,0 +1,59 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+
+# NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Rider
+.idea/
+
+# dotnet CLI
+*.dll
+*.exe
+*.app
+*.pdb
+*.cache
+*.config
+*.db
+
+# Publish
+publish/
+out/
+
+# Logs
+*.log
+
+# Auto-generated files
+Generated_Code/
+
+# Secrets (App.config + secrets.json nếu có)
+*.Secret.config
+appsettings.*.json
+*.env
+*.key
+
+# WPF designer files (optional)
+*.g.cs
+*.g.i.cs
+
+# Crash dumps
+*.dmp
+
+# Others (optional)
+TestResults/
+*.vspscc
+*.vssscc
