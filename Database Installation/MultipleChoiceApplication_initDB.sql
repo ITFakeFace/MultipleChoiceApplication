@@ -1,0 +1,75 @@
+/*
+CREATE DATABASE MultipleChoiceApplication;
+*/
+USE MultipleChoiceApplication;
+
+CREATE TABLE `Users` (
+	`id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	`email` VARCHAR(255) NOT NULL UNIQUE,
+	`username` VARCHAR(50) NOT NULL UNIQUE,
+	`password` VARCHAR(255) NOT NULL,
+	PRIMARY KEY(`id`)
+);
+
+
+CREATE TABLE `Quizzes` (
+	`id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	`title` VARCHAR(255) NOT NULL,
+	`type` VARCHAR(20) NOT NULL,
+	`is_random` BOOLEAN NOT NULL,
+	`attemp_number` INTEGER NOT NULL,
+	`created_by` INTEGER NOT NULL,
+	PRIMARY KEY(`id`)
+);
+
+
+CREATE TABLE `QuizzDetails` (
+	`id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	`quizz_id` INTEGER NOT NULL,
+	`question` VARCHAR(255) NOT NULL,
+	`answer1` VARCHAR(255) NOT NULL,
+	`answer2` VARCHAR(255) NOT NULL,
+	`answer3` VARCHAR(255) NOT NULL,
+	`answer4` VARCHAR(255) NOT NULL,
+	`correct_answer` SMALLINT NOT NULL,
+	PRIMARY KEY(`id`)
+);
+
+
+CREATE TABLE `Attemps` (
+	`id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	`answered_by` INTEGER NOT NULL,
+	`quizz_id` INTEGER NOT NULL,
+	`correct_number` INTEGER,
+	`time` TIME NOT NULL,
+	`complete` BOOLEAN NOT NULL,
+	PRIMARY KEY(`id`)
+);
+
+
+CREATE TABLE `Answers` (
+	`question_id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	`attemp_id` INTEGER NOT NULL,
+	`answer` INTEGER NOT NULL,
+	PRIMARY KEY(`question_id`, `attemp_id`)
+);
+
+
+ALTER TABLE `Quizzes`
+ADD FOREIGN KEY(`created_by`) REFERENCES `Users`(`id`)
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE `QuizzDetails`
+ADD FOREIGN KEY(`quizz_id`) REFERENCES `Quizzes`(`id`)
+ON UPDATE NO ACTION ON DELETE CASCADE;
+ALTER TABLE `Attemps`
+ADD FOREIGN KEY(`answered_by`) REFERENCES `Users`(`id`)
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE `Attemps`
+ADD FOREIGN KEY(`quizz_id`) REFERENCES `Quizzes`(`id`)
+ON UPDATE NO ACTION ON DELETE CASCADE;
+ALTER TABLE `Answers`
+ADD FOREIGN KEY(`question_id`) REFERENCES `QuizzDetails`(`id`)
+ON UPDATE NO ACTION ON DELETE CASCADE;
+ALTER TABLE `Answers`
+ADD FOREIGN KEY(`attemp_id`) REFERENCES `Attemps`(`id`)
+ON UPDATE NO ACTION ON DELETE CASCADE;
