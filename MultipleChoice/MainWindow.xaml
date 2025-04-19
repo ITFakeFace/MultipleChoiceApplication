@@ -14,10 +14,10 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Canvas
-    Width="3840"
-    Height="1080"
-    VerticalAlignment="Center"
-    Background="Transparent">
+        Width="3840"
+        Height="1080"
+        VerticalAlignment="Center"
+        Background="Transparent">
         <Canvas.RenderTransform>
             <TranslateTransform x:Name="SlideTransform" />
         </Canvas.RenderTransform>
@@ -36,12 +36,12 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid
-                Grid.Column="1"
-                Width="1000"
-                Height="600"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="Wheat">
+                    Grid.Column="1"
+                    Width="1000"
+                    Height="600"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="#2C3E50">
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -55,44 +55,45 @@
                     </Grid.ColumnDefinitions>
 
                     <Border
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Padding="10"
-                    Background="White"
-                    CornerRadius="0,0,30,0" />
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Padding="10"
+                        Background="White"
+                        CornerRadius="0,0,30,0" />
                     <Border
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Padding="10"
-                    Background="White"
-                    CornerRadius="0,0,0,30" />
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Padding="10"
+                        Background="White"
+                        CornerRadius="0,0,0,30" />
                     <Border
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Background="White">
-                        <Border Background="Wheat" CornerRadius="30,30,0,0">
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Background="White">
+                        <Border Background="#2C3E50" CornerRadius="30,30,0,0">
                             <TextBlock
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            FontSize="56"
-                            FontWeight="Bold"
-                            Text="Sign In Form" />
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="56"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Text="Sign In Form" />
                         </Border>
                     </Border>
                     <Border
-                    Grid.Row="1"
-                    Grid.RowSpan="2"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    Background="White">
-                        <Border Background="Wheat" CornerRadius="30">
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Background="White">
+                        <Border Background="#2C3E50" CornerRadius="30">
                             <Border
-                            Width="800"
-                            Height="400"
-                            Background="White"
-                            BorderBrush="Black"
-                            BorderThickness="2"
-                            CornerRadius="30">
+                                Width="800"
+                                Height="400"
+                                Background="White"
+                                BorderBrush="Black"
+                                BorderThickness="2"
+                                CornerRadius="30">
 
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -105,63 +106,65 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Label
-                                    x:Name="LblLoginEmail"
-                                    Grid.Row="0"
-                                    Grid.Column="0"
-                                    Padding="0,0,30,0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Content="Email"
-                                    FontSize="48" />
+                                        x:Name="LblLoginEmail"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Padding="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Content="Email"
+                                        FontSize="48" />
                                     <TextBox
-                                    x:Name="InpLoginEmail"
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    Height="60"
-                                    Margin="0,0,50,0"
-                                    FontSize="48" TextChanged="InpLoginEmail_TextChanged" />
-                                    <Label
-                                    x:Name="LblLoginPassword"
-                                    Grid.Row="1"
-                                    Grid.Column="0"
-                                    Padding="0,0,30,0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Content="Password"
-                                    FontSize="48" />
-                                    <PasswordBox
-                                    x:Name="InpLoginPassword"
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Height="60"
-                                    Margin="0,0,50,0"
-                                    FontSize="48" />
-                                    <StackPanel
-                                    Grid.Row="2"
-                                    Grid.ColumnSpan="2"
-                                    HorizontalAlignment="Center"
-                                    Orientation="Horizontal">
-                                        <Button
-                                        x:Name="BtnSignIn"
-                                        Width="250"
-                                        Height="75"
-                                        Click="BtnSignIn_Click"
-                                        Content="Sign in"
+                                        x:Name="InpLoginEmail"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Height="60"
+                                        Margin="0,0,50,0"
                                         FontSize="48"
-                                        FontWeight="Bold">
+                                        TextChanged="InpLoginEmail_TextChanged" />
+                                    <Label
+                                        x:Name="LblLoginPassword"
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Padding="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Content="Password"
+                                        FontSize="48" />
+                                    <PasswordBox
+                                        x:Name="InpLoginPassword"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Height="60"
+                                        Margin="0,0,50,0"
+                                        FontSize="48" />
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        Grid.ColumnSpan="2"
+                                        HorizontalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Button
+                                            x:Name="BtnSignIn"
+                                            Width="250"
+                                            Height="75"
+                                            Click="BtnSignIn_Click"
+                                            Content="Sign in"
+                                            FontSize="48"
+                                            FontWeight="Bold"
+                                            Foreground="White">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="Button">
                                                     <Border
-                                                    Background="{TemplateBinding Background}"
-                                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                                    CornerRadius="15">
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="15">
                                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                     </Border>
                                                 </ControlTemplate>
                                             </Button.Template>
-                                            <Button.Background>Wheat</Button.Background>
-                                            <Button.BorderBrush>Wheat</Button.BorderBrush>
+                                            <Button.Background>#2C3E50</Button.Background>
+                                            <Button.BorderBrush>#2C3E50</Button.BorderBrush>
                                             <Button.BorderThickness>4</Button.BorderThickness>
                                         </Button>
                                     </StackPanel>
@@ -171,15 +174,15 @@
                     </Border>
                 </Grid>
                 <Button
-                x:Name="BtnAnimationRegister"
-                Grid.Column="2"
-                Height="500"
-                VerticalAlignment="Center"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                Click="BtnAnimationRegister_Click"
-                Content="Sign Up →"
-                FontSize="64" />
+                    x:Name="BtnAnimationRegister"
+                    Grid.Column="2"
+                    Height="500"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Click="BtnAnimationRegister_Click"
+                    Content="Sign Up →"
+                    FontSize="64" />
             </Grid>
             <Grid Grid.Column="1" Background="Transparent">
                 <Grid.ColumnDefinitions>
@@ -188,12 +191,12 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid
-                Grid.Column="1"
-                Width="1000"
-                Height="800"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="Wheat">
+                    Grid.Column="1"
+                    Width="1000"
+                    Height="800"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="#2C3E50">
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -207,44 +210,45 @@
                     </Grid.ColumnDefinitions>
 
                     <Border
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Padding="10"
-                    Background="White"
-                    CornerRadius="0,0,30,0" />
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Padding="10"
+                        Background="White"
+                        CornerRadius="0,0,30,0" />
                     <Border
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Padding="10"
-                    Background="White"
-                    CornerRadius="0,0,0,30" />
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Padding="10"
+                        Background="White"
+                        CornerRadius="0,0,0,30" />
                     <Border
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Background="White">
-                        <Border Background="Wheat" CornerRadius="30,30,0,0">
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Background="White">
+                        <Border Background="#2C3E50" CornerRadius="30,30,0,0">
                             <TextBlock
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            FontSize="56"
-                            FontWeight="Bold"
-                            Text="Sign Up Form" />
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="56"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Text="Sign Up Form" />
                         </Border>
                     </Border>
                     <Border
-                    Grid.Row="1"
-                    Grid.RowSpan="2"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    Background="White">
-                        <Border Background="Wheat" CornerRadius="30">
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Background="White">
+                        <Border Background="#2C3E50" CornerRadius="30">
                             <Border
-                            Width="900"
-                            Height="550"
-                            Background="White"
-                            BorderBrush="Black"
-                            BorderThickness="2"
-                            CornerRadius="30">
+                                Width="900"
+                                Height="550"
+                                Background="White"
+                                BorderBrush="Black"
+                                BorderThickness="2"
+                                CornerRadius="30">
 
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -260,136 +264,138 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Label
-                                    x:Name="LblRegisterUsername"
-                                    Grid.Row="0"
-                                    Grid.Column="0"
-                                    Padding="0,0,30,0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Content="Username"
-                                    FontSize="48" />
+                                        x:Name="LblRegisterUsername"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Padding="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Content="Username"
+                                        FontSize="48" />
                                     <TextBox
-                                    x:Name="InpRegisterUsername"
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    Height="60"
-                                    Margin="0,0,50,0"
-                                    FontSize="48" />
+                                        x:Name="InpRegisterUsername"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Height="60"
+                                        Margin="0,0,50,0"
+                                        FontSize="48" />
                                     <Label
-                                    x:Name="LblRegisterEmail"
-                                    Grid.Row="1"
-                                    Grid.Column="0"
-                                    Padding="0,0,30,0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Content="Email"
-                                    FontSize="48" />
+                                        x:Name="LblRegisterEmail"
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Padding="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Content="Email"
+                                        FontSize="48" />
                                     <TextBox
-                                    x:Name="InpRegisterEmail"
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Height="60"
-                                    Margin="0,0,50,0"
-                                    AutomationProperties.LabeledBy="{Binding ElementName=LblRegisterEmail, Mode=OneWay}"
-                                    FontSize="48"
-                                    TextChanged="InpRegisterEmail_TextChanged" />
+                                        x:Name="InpRegisterEmail"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Height="60"
+                                        Margin="0,0,50,0"
+                                        AutomationProperties.LabeledBy="{Binding ElementName=LblRegisterEmail, Mode=OneWay}"
+                                        FontSize="48"
+                                        TextChanged="InpRegisterEmail_TextChanged" />
                                     <Grid
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Margin="0,0,50,0"
-                                    VerticalAlignment="Center">
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Margin="0,0,50,0"
+                                        VerticalAlignment="Center">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
                                         <TextBox
-                                        x:Name="InpRegisterEmailCode"
-                                        Grid.Column="0"
-                                        Height="60"
-                                        FontSize="48" />
+                                            x:Name="InpRegisterEmailCode"
+                                            Grid.Column="0"
+                                            Height="60"
+                                            FontSize="48" />
                                         <Button
-                                        x:Name="BtnRegisterGetEmailCode"
-                                        Grid.Column="1"
-                                        Width="150"
-                                        Padding="20,10"
-                                        Click="BtnRegisterGetEmailCode_Click"
-                                        Content="Get Code"
-                                        FontSize="32">
+                                            x:Name="BtnRegisterGetEmailCode"
+                                            Grid.Column="1"
+                                            Width="150"
+                                            Padding="20,10"
+                                            Click="BtnRegisterGetEmailCode_Click"
+                                            Content="Get Code"
+                                            FontSize="32"
+                                            Foreground="White">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="Button">
                                                     <Border
-                                                    Background="{TemplateBinding Background}"
-                                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                                    CornerRadius="0,20,20,0">
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="0,20,20,0">
                                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                     </Border>
                                                 </ControlTemplate>
                                             </Button.Template>
-                                            <Button.Background>Wheat</Button.Background>
-                                            <Button.BorderBrush>Wheat</Button.BorderBrush>
+                                            <Button.Background>#2C3E50</Button.Background>
+                                            <Button.BorderBrush>#2C3E50</Button.BorderBrush>
                                             <Button.BorderThickness>4</Button.BorderThickness>
                                         </Button>
                                     </Grid>
                                     <Label
-                                    x:Name="LblRegisterPassword"
-                                    Grid.Row="3"
-                                    Grid.Column="0"
-                                    Padding="0,0,30,0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Content="Password"
-                                    FontSize="48" />
+                                        x:Name="LblRegisterPassword"
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Padding="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Content="Password"
+                                        FontSize="48" />
                                     <PasswordBox
-                                    x:Name="InpRegisterPassword"
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    Height="60"
-                                    Margin="0,0,50,0"
-                                    FontSize="48" />
+                                        x:Name="InpRegisterPassword"
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        Height="60"
+                                        Margin="0,0,50,0"
+                                        FontSize="48" />
                                     <Label
-                                    x:Name="LblRegisterConfirmPassword"
-                                    Grid.Row="4"
-                                    Grid.Column="0"
-                                    Padding="0,0,30,0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Content="Confirm Pass"
-                                    FontSize="48" />
+                                        x:Name="LblRegisterConfirmPassword"
+                                        Grid.Row="4"
+                                        Grid.Column="0"
+                                        Padding="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Content="Confirm Pass"
+                                        FontSize="48" />
                                     <PasswordBox
-                                    x:Name="InpRegisterConfirmPassword"
-                                    Grid.Row="4"
-                                    Grid.Column="1"
-                                    Height="60"
-                                    Margin="0,0,50,0"
-                                    FontSize="48" />
+                                        x:Name="InpRegisterConfirmPassword"
+                                        Grid.Row="4"
+                                        Grid.Column="1"
+                                        Height="60"
+                                        Margin="0,0,50,0"
+                                        FontSize="48" />
                                     <StackPanel
-                                    Grid.Row="5"
-                                    Grid.ColumnSpan="2"
-                                    HorizontalAlignment="Center"
-                                    Orientation="Horizontal">
+                                        Grid.Row="5"
+                                        Grid.ColumnSpan="2"
+                                        HorizontalAlignment="Center"
+                                        Orientation="Horizontal">
                                         <Button
-                                        x:Name="BtnSignUp"
-                                        Width="250"
-                                        Height="75"
-                                        Click="BtnSignUp_Click"
-                                        Content="Sign Up"
-                                        FontSize="48"
-                                        FontWeight="Bold">
+                                            x:Name="BtnSignUp"
+                                            Width="250"
+                                            Height="75"
+                                            Click="BtnSignUp_Click"
+                                            Content="Sign Up"
+                                            FontSize="48"
+                                            FontWeight="Bold"
+                                            Foreground="White">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="Button">
                                                     <Border
-                                                    Background="{TemplateBinding Background}"
-                                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                                    CornerRadius="15">
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="15">
                                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                     </Border>
                                                 </ControlTemplate>
                                             </Button.Template>
-                                            <Button.Background>Wheat</Button.Background>
-                                            <Button.BorderBrush>Wheat</Button.BorderBrush>
+                                            <Button.Background>#2C3E50</Button.Background>
+                                            <Button.BorderBrush>#2C3E50</Button.BorderBrush>
                                             <Button.BorderThickness>4</Button.BorderThickness>
                                         </Button>
                                     </StackPanel>
@@ -399,15 +405,15 @@
                     </Border>
                 </Grid>
                 <Button
-                x:Name="BtnAnimationLogin"
-                Grid.Column="0"
-                Height="500"
-                VerticalAlignment="Center"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                Click="BtnAnimationLogin_Click"
-                Content="← Sign In"
-                FontSize="64" />
+                    x:Name="BtnAnimationLogin"
+                    Grid.Column="0"
+                    Height="500"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Click="BtnAnimationLogin_Click"
+                    Content="← Sign In"
+                    FontSize="64" />
             </Grid>
         </Grid>
     </Canvas>

@@ -14,16 +14,76 @@ using System.Windows.Shapes;
 
 namespace MultipleChoice
 {
-    /// <summary>
-    /// Interaction logic for MenuWindow.xaml
-    /// </summary>
     public partial class MenuWindow : Window
     {
+        private HomePage _homePage = new HomePage();
         public int UserId;
         public MenuWindow(int userId)
         {
             InitializeComponent();
             UserId = userId;
+            MainFrame.Navigate(_homePage);
+        }
+
+        private void Sidebar_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ExpandSidebar();
+        }
+
+        private void Sidebar_MouseLeave(object sender, MouseEventArgs e)
+        {
+            CollapseSidebar();
+        }
+
+        private void ExpandSidebar()
+        {
+            int maxWidth = 220;
+            int horizontalGap = 10;
+            SidebarColumn.Width = new GridLength(maxWidth);
+
+            // Hiện text
+            HomeText.Visibility = Visibility.Visible;
+            SettingsText.Visibility = Visibility.Visible;
+            DashboardText.Visibility = Visibility.Visible;
+            LogoutText.Visibility = Visibility.Visible;
+
+            // Update nút
+            var realWidth = maxWidth - horizontalGap / 2;
+            UpdateSidebarButton(BtnHome, HorizontalAlignment.Left, realWidth, new Thickness(10, 0, 10, 0));
+            UpdateSidebarButton(BtnAccount, HorizontalAlignment.Left, realWidth, new Thickness(10, 0, 10, 0));
+            UpdateSidebarButton(BtnQuizz, HorizontalAlignment.Left, realWidth, new Thickness(10));
+            UpdateSidebarButton(BtnLogout, HorizontalAlignment.Left, realWidth, new Thickness(10));
+        }
+
+        private void CollapseSidebar()
+        {
+            int maxWidth = 80;
+            int horizontalGap = 10;
+            SidebarColumn.Width = new GridLength(maxWidth);
+
+            // Ẩn text
+            HomeText.Visibility = Visibility.Collapsed;
+            SettingsText.Visibility = Visibility.Collapsed;
+            DashboardText.Visibility = Visibility.Collapsed;
+            LogoutText.Visibility = Visibility.Collapsed;
+            // Reset lại nút
+            var realWidth = maxWidth - horizontalGap / 2;
+            UpdateSidebarButton(BtnHome, HorizontalAlignment.Center, realWidth, new Thickness(10));
+            UpdateSidebarButton(BtnAccount, HorizontalAlignment.Center, realWidth, new Thickness(10));
+            UpdateSidebarButton(BtnQuizz, HorizontalAlignment.Center, realWidth, new Thickness(10));
+            UpdateSidebarButton(BtnLogout, HorizontalAlignment.Center, realWidth, new Thickness(10));
+        }
+
+        private void UpdateSidebarButton(Button button, HorizontalAlignment alignment, double width, Thickness padding)
+        {
+            button.HorizontalContentAlignment = alignment;
+            button.Width = width;
+            button.Padding = padding;
+        }
+
+        private void BtnHome_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(_homePage);
         }
     }
 }

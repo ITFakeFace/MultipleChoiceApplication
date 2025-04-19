@@ -11,5 +11,118 @@
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="SidebarColumn" Width="80" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Sidebar  -->
+        <Border
+            x:Name="Sidebar"
+            Background="#2C3E50"
+            MouseEnter="Sidebar_MouseEnter"
+            MouseLeave="Sidebar_MouseLeave">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!--  Top Navigation  -->
+                <StackPanel
+                    x:Name="SidebarButtonsPanel"
+                    Margin="0,20,0,0"
+                    Orientation="Vertical">
+                    <Button
+                        x:Name="BtnHome"
+                        Width="70"
+                        Height="70"
+                        Margin="5,20,5,0"
+                        Padding="10"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center" Click="BtnHome_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="30" Text="🏠" />
+                            <TextBlock
+                                x:Name="HomeText"
+                                FontSize="24"
+                                Text=" Homepage"
+                                Visibility="Collapsed" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button
+                        x:Name="BtnQuizz"
+                        Width="70"
+                        Height="70"
+                        Margin="5,20,5,0"
+                        Padding="10"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="30" Text="📋" />
+                            <TextBlock
+                                x:Name="DashboardText"
+                                FontSize="24"
+                                Text=" Quizzes"
+                                Visibility="Collapsed" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <!--  Bottom Actions  -->
+                <StackPanel
+                    x:Name="SidebarBottomPanel"
+                    Grid.Row="1"
+                    Margin="0,0,0,20"
+                    Orientation="Vertical">
+                    <Button
+                        x:Name="BtnAccount"
+                        Width="70"
+                        Height="70"
+                        Margin="5,0,5,20"
+                        Padding="10"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="30" Text="👤" />
+                            <TextBlock
+                                x:Name="SettingsText"
+                                FontSize="24"
+                                Text=" Account"
+                                Visibility="Collapsed" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button
+                        x:Name="BtnLogout"
+                        Width="70"
+                        Height="70"
+                        Margin="5,0,5,20"
+                        Padding="10"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="30" Text="⬅️" />
+                            <TextBlock
+                                x:Name="LogoutText"
+                                FontSize="24"
+                                Text=" Logout"
+                                Visibility="Collapsed" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!--  Main Content  -->
+        <Frame x:Name="MainFrame" Grid.Column="1" />
+    </Grid>
+
 </Window>

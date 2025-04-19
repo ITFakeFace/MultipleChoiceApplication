@@ -1,0 +1,32 @@
+﻿<Page
+    x:Class="MultipleChoice.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="clr-namespace:MultipleChoice.CustomComponent"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MultipleChoice"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="HomePage"
+    HorizontalAlignment="Center"
+    d:DesignHeight="1080"
+    d:DesignWidth="1700"
+    mc:Ignorable="d">
+
+    <Grid Background="White">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+
+            <WrapPanel
+                Width="1680"
+                Margin="0,10,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                ItemHeight="300"
+                ItemWidth="560">
+                <components:QuestionCardUserControl />
+                <components:QuestionCardUserControl />
+                <components:QuestionCardUserControl />
+                <components:QuestionCardUserControl />
+            </WrapPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -28,6 +28,8 @@ namespace MultipleChoice
         public MainWindow()
         {
             InitializeComponent();
+            InpLoginEmail.Text = "baobangbiu@gmail.com";
+            InpLoginPassword.Password = "123456";
         }
         private void BtnAnimationRegister_Click(object sender, RoutedEventArgs e)
         {
