@@ -16,12 +16,15 @@ namespace MultipleChoice
 {
     public partial class MenuWindow : Window
     {
-        private HomePage _homePage = new HomePage();
-        public int UserId;
+        private HomePage _homePage;
+        private QuizzManagementPage _quizzPage;
+        public static int UserId;
         public MenuWindow(int userId)
         {
             InitializeComponent();
             UserId = userId;
+            _homePage = new HomePage();
+            _quizzPage = new QuizzManagementPage();
             MainFrame.Navigate(_homePage);
         }
 
@@ -83,7 +86,14 @@ namespace MultipleChoice
 
         private void BtnHome_Click(object sender, RoutedEventArgs e)
         {
+            TxtPageTitle.Text = "Home Page";
             MainFrame.Navigate(_homePage);
+        }
+
+        private void BtnQuizz_Click(object sender, RoutedEventArgs e)
+        {
+            TxtPageTitle.Text = "Owned Quizz Management";
+            MainFrame.Navigate(_quizzPage);
         }
     }
 }
