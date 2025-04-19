@@ -4,7 +4,7 @@
 *.suo
 *.userosscache
 *.sln.docstates
-appsetings.json
+
 # Build output
 bin/
 obj/
@@ -42,6 +42,7 @@ Generated_Code/
 
 # Secrets (App.config + secrets.json nếu có)
 *.Secret.config
+appsettings.json
 appsettings.*.json
 *.env
 *.key
