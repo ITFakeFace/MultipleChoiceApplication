@@ -346,7 +346,7 @@ namespace MultipleChoice
 
             var menuWindow = new MenuWindow(uId);
             menuWindow.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }
