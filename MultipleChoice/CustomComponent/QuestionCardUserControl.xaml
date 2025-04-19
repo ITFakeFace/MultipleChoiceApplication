@@ -16,9 +16,9 @@
         Background="White"
         BorderBrush="#2C3E50"
         BorderThickness="4"
-        ClipToBounds="False"
+        ClipToBounds="true"
         CornerRadius="30">
-        <Grid ClipToBounds="False">
+        <Grid ClipToBounds="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="4*" />
@@ -36,7 +36,10 @@
                         Stretch="UniformToFill" />
                 </Border.Background>
             </Border>
-            <StackPanel Grid.Column="1" Orientation="Vertical">
+            <StackPanel
+                Grid.Column="1"
+                Margin="5"
+                Orientation="Vertical">
 
                 <TextBlock
                     x:Name="TxtTitle"
@@ -79,6 +82,36 @@
                         TextWrapping="Wrap" />
                 </StackPanel>
             </StackPanel>
+            <Button
+                x:Name="BtnSelect"
+                Grid.Column="2"
+                Content="➡️"
+                FontSize="32">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="BorderElement"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="25">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <!--  Định nghĩa các trạng thái của Button  -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#2C3E50" />
+                                <Setter TargetName="BorderElement" Property="BorderBrush" Value="#2C3E50" />
+                                <!--  Sửa: Đặt Foreground thay vì Foregr  -->
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>Transparent</Button.Background>
+                <Button.BorderBrush>Transparent</Button.BorderBrush>
+                <Button.BorderThickness>4</Button.BorderThickness>
+            </Button>
         </Grid>
     </Border>
 </UserControl>
