@@ -4,7 +4,7 @@
 *.suo
 *.userosscache
 *.sln.docstates
-
+appsetings.json
 # Build output
 bin/
 obj/
