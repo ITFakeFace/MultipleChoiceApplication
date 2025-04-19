@@ -38,11 +38,6 @@ namespace MultipleChoiceApplication
             InitializeComponent();
         }
 
-        private void BtnSignIn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void BtnAnimationRegister_Click(object sender, RoutedEventArgs e)
         {
             var animation = new DoubleAnimation
@@ -70,12 +65,13 @@ namespace MultipleChoiceApplication
             if (InpRegisterEmail.Text == string.Empty)
             {
                 InpRegisterEmail.BorderBrush = Brushes.Black;
+                InpRegisterEmail.Foreground = Brushes.Black;
                 LblRegisterEmail.Foreground = Brushes.Black;
                 return;
             }
 
 
-            if (!SecurityUtil.ValidateEmail(InpRegisterEmail.Text))
+            if (!SecurityUtil.ValidateEmailFormat(InpRegisterEmail.Text))
             {
                 InpRegisterEmail.BorderBrush = Brushes.Red;
                 InpRegisterEmail.Foreground = Brushes.Red;
@@ -171,7 +167,7 @@ namespace MultipleChoiceApplication
             }
 
             // Check Email
-            if (InpRegisterEmail.Text == string.Empty || !SecurityUtil.ValidateEmail(InpRegisterEmail.Text))
+            if (InpRegisterEmail.Text == string.Empty || !SecurityUtil.ValidateEmailFormat(InpRegisterEmail.Text))
             {
                 MessageBox.Show("Error: Please input valid email", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -191,14 +187,42 @@ namespace MultipleChoiceApplication
             InpRegisterEmailCode.BorderBrush = Brushes.Black;
 
             // Check Password and ConfirmPassword
+            if (InpRegisterPassword.Password == string.Empty)
+            {
+                MessageBox.Show("Error: Please enter password", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                LblRegisterPassword.Foreground = Brushes.Red;
+                InpRegisterPassword.Foreground = Brushes.Red;
+                InpRegisterPassword.BorderBrush = Brushes.Red;
+                return;
+            }
+
+            // Reset Format
+            LblRegisterPassword.Foreground = Brushes.Black;
+            InpRegisterPassword.Foreground = Brushes.Black;
+            InpRegisterPassword.BorderBrush = Brushes.Black;
+
+            if (InpRegisterConfirmPassword.Password == string.Empty)
+            {
+                MessageBox.Show("Error: Please enter password", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                LblRegisterConfirmPassword.Foreground = Brushes.Red;
+                InpRegisterConfirmPassword.Foreground = Brushes.Red;
+                InpRegisterConfirmPassword.BorderBrush = Brushes.Red;
+                return;
+            }
+
+            //Reset Format
+            LblRegisterConfirmPassword.Foreground = Brushes.Red;
+            InpRegisterConfirmPassword.Foreground = Brushes.Red;
+            InpRegisterConfirmPassword.BorderBrush = Brushes.Red;
+
             if (InpRegisterConfirmPassword.Password != InpRegisterPassword.Password)
             {
                 MessageBox.Show("Error: Password and Confirm Password must be the same", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 LblRegisterPassword.Foreground = Brushes.Red;
-                LblRegisterConfirmPassword.Foreground = Brushes.Red;
                 InpRegisterPassword.Foreground = Brushes.Red;
-                InpRegisterConfirmPassword.Foreground = Brushes.Red;
                 InpRegisterPassword.BorderBrush = Brushes.Red;
+                LblRegisterConfirmPassword.Foreground = Brushes.Red;
+                InpRegisterConfirmPassword.Foreground = Brushes.Red;
                 InpRegisterConfirmPassword.BorderBrush = Brushes.Red;
                 return;
             }
@@ -241,6 +265,95 @@ namespace MultipleChoiceApplication
                 MessageBox.Show("Error: Failed to created new User", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
+        }
+
+        private void InpLoginEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (InpLoginEmail.Text == string.Empty)
+            {
+                InpLoginEmail.BorderBrush = Brushes.Black;
+                InpLoginEmail.Foreground = Brushes.Black;
+                LblLoginEmail.Foreground = Brushes.Black;
+                return;
+            }
+
+
+            if (!SecurityUtil.ValidateEmailFormat(InpLoginEmail.Text))
+            {
+                InpLoginEmail.BorderBrush = Brushes.Red;
+                InpLoginEmail.Foreground = Brushes.Red;
+                LblLoginEmail.Foreground = Brushes.Red;
+                BtnSignUp.IsEnabled = false;
+                return;
+            }
+            else
+            {
+                InpLoginEmail.BorderBrush = Brushes.Green;
+                InpLoginEmail.Foreground = Brushes.Green;
+                LblLoginEmail.Foreground = Brushes.Green;
+                BtnSignUp.IsEnabled = true;
+                return;
+            }
+        }
+        private void BtnSignIn_Click(object sender, RoutedEventArgs e)
+        {
+            // Check Email
+            if (InpLoginEmail.Text == string.Empty || !SecurityUtil.ValidateEmailFormat(InpLoginEmail.Text))
+            {
+                MessageBox.Show("Error: Please input valid email", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                InpLoginEmail.BorderBrush = Brushes.Red;
+                InpLoginEmail.Foreground = Brushes.Red;
+                LblLoginEmail.Foreground = Brushes.Red;
+                return;
+            }
+
+            // Reset Format
+            InpLoginEmail.BorderBrush = Brushes.Black;
+            InpLoginEmail.Foreground = Brushes.Black;
+            LblLoginEmail.Foreground = Brushes.Black;
+
+            // Check Password
+            if (InpLoginPassword.Password == string.Empty)
+            {
+                MessageBox.Show("Error: Please input password", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                InpLoginPassword.BorderBrush = Brushes.Red;
+                InpLoginPassword.Foreground = Brushes.Red;
+                LblLoginPassword.Foreground = Brushes.Red;
+                return;
+            }
+            // Reset Format
+            InpLoginPassword.BorderBrush = Brushes.Black;
+            InpLoginPassword.Foreground = Brushes.Black;
+            LblLoginPassword.Foreground = Brushes.Black;
+
+            if (_authenticationService == null)
+            {
+                _authenticationService = new AuthenticationService();
+            }
+
+            int uId = _authenticationService.Login(InpLoginEmail.Text, InpLoginPassword.Password);
+            if (uId <= 0)
+            {
+                MessageBox.Show("Error: Please input password", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                InpLoginEmail.BorderBrush = Brushes.Red;
+                InpLoginEmail.Foreground = Brushes.Red;
+                LblLoginEmail.Foreground = Brushes.Red;
+                InpLoginPassword.BorderBrush = Brushes.Red;
+                InpLoginPassword.Foreground = Brushes.Red;
+                LblLoginPassword.Foreground = Brushes.Red;
+                return;
+            }
+            //Reset Formatss
+            InpLoginEmail.BorderBrush = Brushes.Black;
+            InpLoginEmail.Foreground = Brushes.Black;
+            LblLoginEmail.Foreground = Brushes.Black;
+            InpLoginPassword.BorderBrush = Brushes.Black;
+            InpLoginPassword.Foreground = Brushes.Black;
+            LblLoginPassword.Foreground = Brushes.Black;
+
+            var menuWindow = new MenuWindow(uId);
+            menuWindow.Show();
+            this.Hide();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace MultipleChoiceApplication.Utils
             return code.ToString();
         }
 
-        public static bool ValidateEmail(string email)
+        public static bool ValidateEmailFormat(string email)
         {
             string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             return Regex.IsMatch(email, emailPattern);
