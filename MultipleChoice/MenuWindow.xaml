@@ -43,7 +43,8 @@
                         Padding="10"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center" Click="BtnHome_Click">
+                        VerticalContentAlignment="Center"
+                        Click="BtnHome_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="30" Text="🏠" />
                             <TextBlock
@@ -62,7 +63,8 @@
                         Padding="10"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center">
+                        VerticalContentAlignment="Center"
+                        Click="BtnQuizz_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="30" Text="📋" />
                             <TextBlock
@@ -122,7 +124,45 @@
         </Border>
 
         <!--  Main Content  -->
-        <Frame x:Name="MainFrame" Grid.Column="1" />
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <Button
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Content="⬅️ Back"
+                    FontSize="32"
+                    IsEnabled="True">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    RecognizesAccessKey="True" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="True">
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Foreground" Value="Transparent" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <TextBlock
+                    x:Name="TxtPageTitle"
+                    Margin="30,0,0,0"
+                    FontSize="48"
+                    FontWeight="Bold"
+                    Text="Page Title" />
+            </StackPanel>
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+        </StackPanel>
     </Grid>
 
 </Window>

@@ -12,7 +12,11 @@ namespace MultipleChoice.Models
         public string Title { get; set; } = string.Empty;
         public string Type { get; set; } = string.Empty;
         public bool IsRandom { get; set; }
-        public int AttempNumber { get; set; }
+        public int? AttempNumber { get; set; }
         public int CreatedBy { get; set; }
+        public bool IsResultShowable { get; set; }
+        public DateTime? StartAt { get; set; }
+        public DateTime? EndAt { get; set; }
+        public TimeSpan? TimeLimit { get; set; }
     }
 }

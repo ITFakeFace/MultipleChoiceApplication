@@ -11,14 +11,17 @@ CREATE TABLE `Users` (
 	PRIMARY KEY(`id`)
 );
 
-
 CREATE TABLE `Quizzes` (
 	`id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
 	`title` VARCHAR(255) NOT NULL,
 	`type` VARCHAR(20) NOT NULL,
 	`is_random` BOOLEAN NOT NULL,
-	`attemp_number` INTEGER NOT NULL,
+	`attemp_number` INTEGER,
 	`created_by` INTEGER NOT NULL,
+	`is_result_showable` BOOLEAN NOT NULL,
+	`start_at` DATETIME,
+	`end_at` DATETIME,
+	`time_limit` TIME,
 	PRIMARY KEY(`id`)
 );
 

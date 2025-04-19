@@ -32,7 +32,7 @@
                 <Border.Background>
                     <ImageBrush
                         x:Name="ImageBox"
-                        ImageSource="/Assets/DefaultImage.jpg"
+                        ImageSource="pack://application:,,,/Assets/DefaultImage.jpg"
                         Stretch="UniformToFill" />
                 </Border.Background>
             </Border>
@@ -43,7 +43,7 @@
 
                 <TextBlock
                     x:Name="TxtTitle"
-                    Margin="0,0,0,10"
+                    Margin="0,0,0,5"
                     FontSize="20"
                     FontWeight="Bold"
                     Text="This is a very long Title with multiple content inside it"
@@ -79,6 +79,22 @@
                         x:Name="TxtQuestionNumber"
                         FontSize="16"
                         Text="100"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+                <StackPanel
+                    x:Name="StatusContainer"
+                    Margin="0,0,0,5"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="Red"
+                        Text="* Status: "
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        x:Name="TxtStatus"
+                        FontSize="12"
+                        Foreground="Red"
+                        Text="Running out of time"
                         TextWrapping="Wrap" />
                 </StackPanel>
             </StackPanel>
