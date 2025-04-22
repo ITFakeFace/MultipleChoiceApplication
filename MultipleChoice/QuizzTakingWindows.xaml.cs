@@ -27,24 +27,26 @@ namespace MultipleChoice
         AttempServices _attempServices;
         AnswerService _answerService;
         List<QuizzDetails> quizzDetails;
-        public Dictionary<int,AnswerDTO> _quizzAnswerDict = new Dictionary<int,AnswerDTO>();
+        public Dictionary<int, AnswerDTO> _quizzAnswerDict = new Dictionary<int, AnswerDTO>();
         private int currentQuestion = 0;
         private DispatcherTimer countdownTimer;
         private int remainingTimeInSeconds;
         private int quizzID;
         private int timeLimitInSeconds;
+        private MenuWindow _menuWindow;
 
-        public QuizzTakingWindows(int quizzID,int timeLimit,bool IsResultShowable)
+        public QuizzTakingWindows(int quizzID, MenuWindow menu, int timeLimit, bool IsResultShowable)
         {
             InitializeComponent();
+            _menuWindow = menu;
             _quizzDetailsService = new QuizzDetailsService();
             this.quizzDetails = _quizzDetailsService.GetByQuizzId(quizzID);
             this.quizzID = quizzID;
             LoadQuestion(currentQuestion);
             InitializeQuestionChoice(quizzDetails.Count());
-            this.timeLimitInSeconds = timeLimit*60;
+            this.timeLimitInSeconds = timeLimit * 60;
             // Cài đặt thời gian đếm ngược (ví dụ: 10 phút = 600 giây)
-            remainingTimeInSeconds = timeLimit*60 ; 
+            remainingTimeInSeconds = timeLimit * 60;
             StartCountdown();
         }
 
@@ -82,7 +84,7 @@ namespace MultipleChoice
                 int questionNumber = int.Parse(clickedBtn.Content.ToString()!) - 1;
                 this.currentQuestion = questionNumber;
                 LoadQuestion(questionNumber);
-                if(questionNumber == quizzDetails.Count() - 1)
+                if (questionNumber == quizzDetails.Count() - 1)
                 {
                     NextBtn.Visibility = Visibility.Hidden;
                     SubmitBtn.Visibility = Visibility.Visible;
@@ -121,11 +123,11 @@ namespace MultipleChoice
 
             Attemp attemp = CreateModelObj.CreateAttemp(answerList, this.quizzID, this.timeLimitInSeconds - this.remainingTimeInSeconds, isCompleted);
             int attemptID = _attempServices.Create(attemp);
-            
+
             List<Answer> answers = CreateModelObj.CreateAnswers(answerList, attemptID);
             _answerService.Create(answers);
 
-            Window window = new AttemptResultWindow(attemptID);
+            Window window = new AttemptResultWindow(attemptID, _menuWindow);
             this.Hide();
             window.Show();
         }
@@ -156,7 +158,7 @@ namespace MultipleChoice
             }
             else
             {
-                 _quizzAnswerDict.Add(questionNumber, new AnswerDTO(quizzDetails[questionNumber].Id, selectedAnswer, quizzDetails[questionNumber].CorrectAnswer));
+                _quizzAnswerDict.Add(questionNumber, new AnswerDTO(quizzDetails[questionNumber].Id, selectedAnswer, quizzDetails[questionNumber].CorrectAnswer));
             }
         }
         private void Answer_Checked(object sender, RoutedEventArgs e)
@@ -184,7 +186,7 @@ namespace MultipleChoice
                 Q2.Content = currentQuestion.Answer2; Q2.Tag = 2; Q2.IsChecked = false;
                 Q3.Content = currentQuestion.Answer3; Q3.Tag = 3; Q3.IsChecked = false;
                 Q4.Content = currentQuestion.Answer4; Q4.Tag = 4; Q4.IsChecked = false;
-                    
+
                 // Kiểm tra và đánh dấu đáp án đã chọn (nếu có)
                 if (_quizzAnswerDict.ContainsKey(questionNumber))
                 {
@@ -200,6 +202,6 @@ namespace MultipleChoice
             }
         }
 
-        
+
     }
 }

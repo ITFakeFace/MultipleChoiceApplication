@@ -25,8 +25,8 @@ namespace MultipleChoice
         int quizzID;
         int timeLimit;
         bool IsResultShowable;
-        QuizzService _quizzService = new QuizzService();
-        UserService _userService = new UserService();
+        private QuizzService _quizzService = new QuizzService();
+        private UserService _userService = new UserService();
 
         public ExamPage(int quizzID)
         {
@@ -46,9 +46,9 @@ namespace MultipleChoice
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            QuizzTakingWindows quizzTakingWindows = new QuizzTakingWindows(this.quizzID,this.timeLimit,this.IsResultShowable);
-            quizzTakingWindows.Show();
             Window parent = Window.GetWindow(this);
+            QuizzTakingWindows quizzTakingWindows = new QuizzTakingWindows(this.quizzID, (MenuWindow)parent, this.timeLimit, this.IsResultShowable);
+            quizzTakingWindows.Show();
             parent.Hide();
         }
     }

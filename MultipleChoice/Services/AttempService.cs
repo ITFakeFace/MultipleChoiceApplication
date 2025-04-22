@@ -92,11 +92,39 @@ namespace MultipleChoice.Services
                         }
                     }
                     return null;  // Trả về null nếu không tìm thấy kết quả
-            }
+                }
                 catch (Exception ex)
                 {
-                // Xử lý lỗi nếu có
-                return null;  // Trả về null nếu có lỗi trong quá trình truy vấn
+                    // Xử lý lỗi nếu có
+                    return null;  // Trả về null nếu có lỗi trong quá trình truy vấn
+                }
+            }
+        }
+
+        public int GetAttempsOfUserByQuizzId(int userId, int quizzId)
+        {
+            using (var conn = GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+
+                    string sql = @"SELECT COUNT(*) as ATTEMPS 
+                           FROM attemps 
+                           WHERE answered_by = @UserId AND quizz_id = @QuizzId";
+
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        cmd.Parameters.AddWithValue("@QuizzId", quizzId);
+
+                        return Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Ghi log nếu cần
+                    return -1; // Trả về -1 nếu lỗi
                 }
             }
         }

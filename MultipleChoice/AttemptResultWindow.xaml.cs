@@ -24,12 +24,12 @@ namespace MultipleChoice
         AttemptInfo? attemptInfo;
         AttempServices services;
         MenuWindow menu;
-        public AttemptResultWindow(int attempID)
+        public AttemptResultWindow(int attempID, MenuWindow menu)
         {
             InitializeComponent();
             services = new AttempServices();
             attemptInfo = services.GetAttemptInfoByID(attempID);
-            MenuWindow? menu = Application.Current.Properties["MenuWindow"] as MenuWindow;
+            this.menu = menu;
             // Bind dữ liệu vào Grid
             BindDataToGrid();
         }
@@ -54,7 +54,7 @@ namespace MultipleChoice
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            menu.Show();
+            this.menu.Show();
         }
     }
 

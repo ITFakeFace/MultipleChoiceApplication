@@ -32,7 +32,7 @@ namespace MultipleChoice.CustomComponent
 
         private readonly UserService _userService = new UserService();
         private readonly QuizzDetailsService _quizzDetailsService = new QuizzDetailsService();
-
+        private readonly AttempServices _attempServices = new AttempServices();
         public Quizz Quizz
         {
             get => (Quizz)GetValue(QuizzProperty);
@@ -83,6 +83,24 @@ namespace MultipleChoice.CustomComponent
         {
             var window = Window.GetWindow(this) as MenuWindow;
             window.MainFrame.Navigate(new RankingPage(Quizz.Id));
+        }
+
+        private void BtnDetails_Click(object sender, RoutedEventArgs e)
+        {
+            var attemps = _attempServices.GetAttempsOfUserByQuizzId(MenuWindow.UserId, Quizz.Id);
+            if (attemps >= Quizz.AttempNumber)
+            {
+                MessageBox.Show("Error: Run out of attemps", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (DateTime.Now > Quizz.EndAt)
+            {
+                MessageBox.Show("Error: Quizz has been ended", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var window = Window.GetWindow(this) as MenuWindow;
+            window.MainFrame.Navigate(new ExamPage(Quizz.Id));
         }
     }
 }

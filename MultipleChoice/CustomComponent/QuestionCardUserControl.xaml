@@ -151,7 +151,7 @@
                     BorderThickness="4"
                     Content="➡️"
                     FontSize="24"
-                    ToolTip="View Details">
+                    ToolTip="View Details" Click="BtnDetails_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border
