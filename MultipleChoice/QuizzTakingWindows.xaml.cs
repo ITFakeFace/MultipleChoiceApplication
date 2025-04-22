@@ -27,6 +27,8 @@ namespace MultipleChoice
         AttempServices _attempServices;
         AnswerService _answerService;
         List<QuizzDetails> quizzDetails;
+        DateTime currentDateTime;
+
         public Dictionary<int, AnswerDTO> _quizzAnswerDict = new Dictionary<int, AnswerDTO>();
         private int currentQuestion = 0;
         private DispatcherTimer countdownTimer;
@@ -34,19 +36,21 @@ namespace MultipleChoice
         private int quizzID;
         private int timeLimitInSeconds;
         private MenuWindow _menuWindow;
+        private bool IsResultShowable;
 
         public QuizzTakingWindows(int quizzID, MenuWindow menu, int timeLimit, bool IsResultShowable)
         {
             InitializeComponent();
-            _menuWindow = menu;
-            _quizzDetailsService = new QuizzDetailsService();
-            this.quizzDetails = _quizzDetailsService.GetByQuizzId(quizzID);
+            this._menuWindow = menu;
+            this._quizzDetailsService = new QuizzDetailsService();
+            this.currentDateTime = DateTime.Now;
             this.quizzID = quizzID;
+            this.timeLimitInSeconds = timeLimit * 60;
+            this.remainingTimeInSeconds = timeLimit * 60;
+            this.IsResultShowable = IsResultShowable;
+            this.quizzDetails = _quizzDetailsService.GetByQuizzId(quizzID);
             LoadQuestion(currentQuestion);
             InitializeQuestionChoice(quizzDetails.Count());
-            this.timeLimitInSeconds = timeLimit * 60;
-            // Cài đặt thời gian đếm ngược (ví dụ: 10 phút = 600 giây)
-            remainingTimeInSeconds = timeLimit * 60;
             StartCountdown();
         }
 
@@ -120,14 +124,14 @@ namespace MultipleChoice
 
             List<AnswerDTO> answerList = this._quizzAnswerDict.Values.ToList();
             bool isCompleted = answerList.Count() == this.quizzDetails.Count();
-
-            Attemp attemp = CreateModelObj.CreateAttemp(answerList, this.quizzID, this.timeLimitInSeconds - this.remainingTimeInSeconds, isCompleted);
+            int currentTime = this.timeLimitInSeconds - this.remainingTimeInSeconds;
+            Attemp attemp = CreateModelObj.CreateAttemp(answerList, this.quizzID, currentTime, isCompleted,this.currentDateTime);
             int attemptID = _attempServices.Create(attemp);
 
             List<Answer> answers = CreateModelObj.CreateAnswers(answerList, attemptID);
             _answerService.Create(answers);
 
-            Window window = new AttemptResultWindow(attemptID, _menuWindow);
+            Window window = new AttemptResultWindow(attemptID,this.quizzID, _menuWindow,this.IsResultShowable);
             window.Show();
             this.Close();
         }
@@ -144,7 +148,6 @@ namespace MultipleChoice
                     Margin = new Thickness(5)
                 };
 
-                // Optional: gắn sự kiện click
                 btn.Click += QuestionChoice_Click;
 
                 QuestionChoicePanel.Children.Add(btn);

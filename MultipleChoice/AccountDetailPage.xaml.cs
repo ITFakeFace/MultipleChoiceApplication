@@ -24,13 +24,15 @@ namespace MultipleChoice
     public partial class AccountDetailPage : Page
     {
         private readonly UserService _userService = new UserService();
+        private readonly AttempServices _attempServices = new AttempServices();
         private User _user { get; set; }
         public AccountDetailPage()
         {
             InitializeComponent();
             _user = _userService.GetById(MenuWindow.UserId);
             InitializeFetchingData();
-
+            List<dynamic> userAttempts = LoadUserAttemptInfo();
+            attemptsDataGrid.ItemsSource = userAttempts;
 
             QuizzAnalyzerUserControl analyzer = new QuizzAnalyzerUserControl();
             analyzer.SetData(50, 10, 15, 5, 20); // 50 quiz với 4 mức độ
@@ -42,6 +44,26 @@ namespace MultipleChoice
         {
             TxtUsername.Text = _user.Username;
             TxtEmail.Text = _user.Email;
+        }
+
+        public List<dynamic> LoadUserAttemptInfo()
+        {
+            List<UserAttempt> userAttempts =  _attempServices.GetAttemptsByUserID(MenuWindow.UserId);
+            List<dynamic> newUserAttemps = new List<dynamic>();
+            foreach (var userAttempt in userAttempts)
+            {
+                var newUserAttempt = new
+                {
+                    userAttempt.Quizz,
+                    userAttempt.Score,
+                    userAttempt.Time,
+                    Date = userAttempt.StartAt.ToString("dd/MM/yyyy"),
+                    AtTime = userAttempt.StartAt.ToString("HH:mm"),
+                    userAttempt.IsCompleted,
+                };
+                newUserAttemps.Add(newUserAttempt);
+            }
+            return newUserAttemps;
         }
     }
 }

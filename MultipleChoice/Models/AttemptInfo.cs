@@ -13,6 +13,8 @@ namespace MultipleChoice.Models
         public int CorrectNumber { get; set; }
         public TimeSpan Time { get; set; }
         public bool Complete { get; set; }
+        public DateTime? StartAt { get; set; }
+
     }
 
 }

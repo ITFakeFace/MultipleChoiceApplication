@@ -26,14 +26,16 @@
 
     <Grid>
         <!--  TextBlock Result  -->
-        <TextBlock Style="{StaticResource ResultTextBlockStyle}" Text="Result" />
+        <TextBlock Style="{StaticResource ResultTextBlockStyle}" Text="Result" Margin="0,34,0,0" />
 
         <Grid
-            Grid.RowSpan="2"
-            Height="398"
-            Margin="100,153,100,0"
-            VerticalAlignment="Top">
+            x:Name="ResultNotification"
+            Height="488"
+            Margin="100,120,100,0"
+            VerticalAlignment="Top"
+            Visibility="Visible">
             <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
                 <RowDefinition Height="80" />
                 <RowDefinition Height="80" />
                 <RowDefinition Height="80" />
@@ -124,16 +126,43 @@
                 VerticalAlignment="Center"
                 FontSize="36"
                 FontWeight="Bold" />
+            <!--  Dòng 6  -->
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                FontSize="36"
+                FontWeight="Bold"
+                Text="Start At" />
+            <TextBlock
+                x:Name="StartAt"
+                Grid.Row="5"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                FontSize="36"
+                FontWeight="Bold" />
+
         </Grid>
+        
+        <ScrollViewer x:Name="ShowResultView" Margin="100,120,100,142" Visibility="Hidden">
+            <StackPanel x:Name="ResultsPanel">
+            </StackPanel>
+        </ScrollViewer>
+        
         <Button
-            Width="206"
-            Height="52"
-            Margin="985,613,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            Margin="0,0,147,65"
             Background="LightGreen"
             Click="Button_Click"
-            Content="OK"
-            FontSize="36" />
+            Content="HomePage"
+            FontSize="36" HorizontalAlignment="Right" Width="206" Height="52" VerticalAlignment="Bottom" />
+        <Button
+            x:Name="ShowResultBtn"
+            Margin="0,0,358,65"
+            Background="LightCoral"
+            Click="ShowResultBtn_Click"
+            Content="Answer"
+            MouseEnter="ShowResultBtn_MouseEnter" MouseLeave="ShowResultBtn_MouseLeave" 
+            Cursor="Arrow"
+            FontSize="36" HorizontalAlignment="Right" Width="206" Height="52" VerticalAlignment="Bottom"  />
     </Grid>
 </Window>

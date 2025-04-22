@@ -10,17 +10,18 @@ namespace MultipleChoice.Utils
     class CreateModelObj
     {
         //Create Attemp
-        public static Attemp CreateAttemp(List<AnswerDTO> answerList, int quizzID, int timeSpent,bool isCompleted)
+        public static Attemp CreateAttemp(List<AnswerDTO> answerList, int quizzID, int timeSpent,bool isCompleted,DateTime currentDateTime)
         {
             int correctNumber = Grading(answerList);
-            TimeSpan timeSpan = TimeSpan.FromSeconds(correctNumber);
+            TimeSpan timeSpan = TimeSpan.FromSeconds(timeSpent);
             return new Attemp
             {
                 AnsweredBy = MenuWindow.UserId,
                 QuizzId = quizzID,
                 CorrectNumber = correctNumber,
                 Time = timeSpan,
-                Complete = isCompleted
+                Complete = isCompleted,
+                StartAt = currentDateTime,
             };
         }
 

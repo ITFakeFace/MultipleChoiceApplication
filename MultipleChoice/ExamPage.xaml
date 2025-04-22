@@ -18,7 +18,7 @@
             <!-- Tiêu đề -->
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 20">
                 <TextBlock Text="🎯" FontSize="80" Foreground="Red" VerticalAlignment="Center"/>
-                <TextBlock Text="English Grammar Rules" FontSize="100" FontWeight="Bold" Margin="10 0" VerticalAlignment="Center"/>
+                <TextBlock x:Name="Title" Text="" FontSize="100" FontWeight="Bold" Margin="10 0" VerticalAlignment="Center"/>
             </StackPanel>
 
             <!-- Bảng thông tin -->

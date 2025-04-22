@@ -33,6 +33,7 @@ namespace MultipleChoice
 
         public void LoadListQuizz()
         {
+            ListQuizzCard.Children.Clear();
             quizzList = _quizzService.GetAll();
             foreach (Quizz quizz in quizzList)
             {

@@ -89,6 +89,7 @@ namespace MultipleChoice
         private void BtnHome_Click(object sender, RoutedEventArgs e)
         {
             TxtPageTitle.Text = "Home Page";
+            _homePage.LoadListQuizz();
             MainFrame.Navigate(_homePage);
         }
 
