@@ -18,6 +18,7 @@ namespace MultipleChoice
     {
         private HomePage _homePage;
         private QuizzManagementPage _quizzPage;
+        private AccountDetailPage _accountDetailPage;
         public static int UserId;
         public MenuWindow(int userId)
         {
@@ -25,6 +26,7 @@ namespace MultipleChoice
             UserId = userId;
             _homePage = new HomePage();
             _quizzPage = new QuizzManagementPage();
+            _accountDetailPage = new AccountDetailPage();
             MainFrame.Navigate(_homePage);
         }
 
@@ -94,6 +96,11 @@ namespace MultipleChoice
         {
             TxtPageTitle.Text = "Owned Quizz Management";
             MainFrame.Navigate(_quizzPage);
+        }
+
+        private void BtnAccount_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(_accountDetailPage);
         }
     }
 }

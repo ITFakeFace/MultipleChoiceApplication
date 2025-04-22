@@ -1,0 +1,178 @@
+﻿<Page
+    x:Class="MultipleChoice.AccountDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MultipleChoice"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AccountDetailPage"
+    d:DesignHeight="1010"
+    d:DesignWidth="1700"
+    mc:Ignorable="d">
+
+    <Grid Margin="20" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="2*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="8*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                FontSize="48"
+                FontWeight="Bold"
+                Text="Personal Information" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="20,10"
+                FontSize="32"
+                FontWeight="DemiBold"
+                Text="Username:" />
+            <TextBlock
+                x:Name="TxtUsername"
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="20,10"
+                FontSize="32"
+                Text="Username" />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="20,10"
+                FontSize="32"
+                FontWeight="DemiBold"
+                Text="Email:" />
+            <TextBlock
+                x:Name="TxtEmail"
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="20,10"
+                FontSize="32"
+                Text="Username" />
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="7*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.RowSpan="2" Grid.Column="0">
+
+                <TextBlock
+                    FontSize="48"
+                    FontWeight="Bold"
+                    Text="Achievements" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="20,10"
+                    FontSize="32"
+                    FontWeight="DemiBold"
+                    Text="Quizz Completed:" />
+                <Grid Grid.Row="2" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="4*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="40,10"
+                        VerticalAlignment="Center"
+                        FontSize="32"
+                        Foreground="#68C15A"
+                        Text="Excellent:" />
+                    <TextBlock
+                        x:Name="TxtExcellent"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="32"
+                        Foreground="#68C15A"
+                        Text="0" />
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="40,10"
+                        VerticalAlignment="Center"
+                        FontSize="32"
+                        Foreground="#0A9DBB"
+                        Text="Good:" />
+                    <TextBlock
+                        x:Name="TxtGood"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="32"
+                        Foreground="#0A9DBB"
+                        Text="0" />
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="40,10"
+                        VerticalAlignment="Center"
+                        FontSize="32"
+                        Foreground="#F6B750"
+                        Text="Avarage:" />
+                    <TextBlock
+                        x:Name="TxtAverage"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="32"
+                        Foreground="#F6B750"
+                        Text="0" />
+                    <TextBlock
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="40,10"
+                        FontSize="32"
+                        Foreground="#DA3F45"
+                        Text="Low:" />
+                    <TextBlock
+                        x:Name="TxtLow"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="32"
+                        Foreground="#DA3F45"
+                        Text="0" />
+                </Grid>
+            </StackPanel>
+            <Canvas
+                x:Name="AnalyzerBox"
+                Grid.Row="2"
+                Grid.Column="1" />
+        </Grid>
+    </Grid>
+</Page>

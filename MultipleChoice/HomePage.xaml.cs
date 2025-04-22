@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MultipleChoice.CustomComponent;
+using MultipleChoice.Models;
+using MultipleChoice.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,27 @@ namespace MultipleChoice
     /// </summary>
     public partial class HomePage : Page
     {
+        private readonly QuizzService _quizzService = new QuizzService();
+        public List<Quizz> quizzList { get; set; }
         public HomePage()
         {
             InitializeComponent();
+            LoadListQuizz();
+        }
+
+        public void LoadListQuizz()
+        {
+            quizzList = _quizzService.GetAll();
+            foreach (Quizz quizz in quizzList)
+            {
+                var card = new QuestionCardUserControl
+                {
+                    Quizz = quizz,
+                    Margin = new Thickness(10)
+                };
+
+                ListQuizzCard.Children.Add(card);
+            }
         }
     }
 }

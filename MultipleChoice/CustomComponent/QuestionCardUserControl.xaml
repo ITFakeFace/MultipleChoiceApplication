@@ -6,13 +6,13 @@
     xmlns:local="clr-namespace:MultipleChoice.CustomComponent"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="500"
-    Height="200"
-    d:DesignHeight="200"
+    Height="210"
+    d:DesignHeight="210"
     d:DesignWidth="500"
     mc:Ignorable="d">
     <Border
         Width="500"
-        Height="200"
+        Height="210"
         Background="White"
         BorderBrush="#2C3E50"
         BorderThickness="4"
@@ -43,7 +43,9 @@
 
                 <TextBlock
                     x:Name="TxtTitle"
+                    Height="80"
                     Margin="0,0,0,5"
+                    VerticalAlignment="Center"
                     FontSize="20"
                     FontWeight="Bold"
                     Text="This is a very long Title with multiple content inside it"
@@ -86,48 +88,93 @@
                     Margin="0,0,0,5"
                     Orientation="Horizontal">
                     <TextBlock
-                        FontSize="12"
+                        x:Name="LblStatus"
+                        FontSize="16"
                         Foreground="Red"
                         Text="* Status: "
                         TextWrapping="Wrap" />
                     <TextBlock
                         x:Name="TxtStatus"
-                        FontSize="12"
+                        FontSize="16"
                         Foreground="Red"
                         Text="Running out of time"
                         TextWrapping="Wrap" />
                 </StackPanel>
             </StackPanel>
-            <Button
-                x:Name="BtnSelect"
-                Grid.Column="2"
-                Content="➡️"
-                FontSize="32">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border
-                            x:Name="BorderElement"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="25">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <!--  Định nghĩa các trạng thái của Button  -->
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="BorderElement" Property="Background" Value="#2C3E50" />
-                                <Setter TargetName="BorderElement" Property="BorderBrush" Value="#2C3E50" />
-                                <!--  Sửa: Đặt Foreground thay vì Foregr  -->
-                                <Setter Property="Foreground" Value="White" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-                <Button.Background>Transparent</Button.Background>
-                <Button.BorderBrush>Transparent</Button.BorderBrush>
-                <Button.BorderThickness>4</Button.BorderThickness>
-            </Button>
+            <!--  Cột cuối: Hiển thị hai nút  -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!--  Nút Ranking  -->
+                <Button
+                    x:Name="BtnRanking"
+                    Grid.Row="0"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    BorderThickness="4"
+                    Click="BtnRanking_Click"
+                    Content="🏆"
+                    FontSize="24"
+                    ToolTip="View Ranking">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                x:Name="BorderElement"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="25">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="BorderElement" Property="Background" Value="#2C3E50" />
+                                    <Setter TargetName="BorderElement" Property="BorderBrush" Value="#2C3E50" />
+                                    <Setter Property="Foreground" Value="White" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <!--  Nút Details  -->
+                <Button
+                    x:Name="BtnDetails"
+                    Grid.Row="1"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    BorderThickness="4"
+                    Content="➡️"
+                    FontSize="24"
+                    ToolTip="View Details">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                x:Name="BorderElement"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="25">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="BorderElement" Property="Background" Value="#2C3E50" />
+                                    <Setter TargetName="BorderElement" Property="BorderBrush" Value="#2C3E50" />
+                                    <Setter Property="Foreground" Value="White" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>

@@ -21,6 +21,7 @@
             Margin="20"
             DisplayMemberPath="Question"
             FontSize="24"
+            SelectionChanged="ListBoxDetails_SelectionChanged"
             SelectionMode="Single" />
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Width="Auto" Margin="20">
@@ -153,7 +154,7 @@
                         Margin="30,10"
                         Background="LightGreen"
                         Content="Save"
-                        FontSize="32" />
+                        FontSize="32" Click="BtnSave_Click" />
 
                     <Button
                         Width="200"

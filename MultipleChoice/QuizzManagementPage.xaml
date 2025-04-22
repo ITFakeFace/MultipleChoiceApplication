@@ -8,7 +8,7 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Title="QuizzManagementPage"
-    d:DesignHeight="1080"
+    d:DesignHeight="1010"
     d:DesignWidth="1700"
     mc:Ignorable="d">
 
@@ -241,8 +241,9 @@
                         Height="50"
                         Margin="30,10"
                         Background="CadetBlue"
+                        Click="BtnDetails_Click"
                         Content="Go to Details"
-                        FontSize="32" Click="BtnDetails_Click" />
+                        FontSize="32" />
                 </StackPanel>
             </Grid>
         </StackPanel>
