@@ -33,11 +33,12 @@ namespace MultipleChoice
             InitializeComponent();
             this.quizzID = quizzID;
             Quizz quizz = _quizzService.GetById(quizzID);
+            Title.Text = quizz.Title;
             CreatedByText.Text = _userService.GetById(quizz.CreatedBy).Username.ToString();
             TypeText.Text = quizz.Type.ToString();
-            AttemptText.Text = quizz.AttempNumber.ToString();
+            AttemptText.Text = string.IsNullOrEmpty(quizz.AttempNumber?.ToString()) ? "Unlimited" : quizz.AttempNumber.ToString();
             TimeLimitText.Text = quizz.TimeLimit.ToString();
-            StartAtText.Text = quizz.StartAt.ToString();
+            StartAtText.Text = string.IsNullOrEmpty(quizz.StartAt?.ToString()) ? "Anytime": quizz.StartAt?.ToString(); 
             ResultShowableText.Text = quizz.IsResultShowable ? "allow" : "not allow";
             this.timeLimit = (int)(quizz.TimeLimit?.TotalMinutes ?? 0);
 

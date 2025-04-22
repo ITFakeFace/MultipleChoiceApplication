@@ -1,4 +1,4 @@
-﻿using MultipleChoice.CustomComponent;
+using MultipleChoice.CustomComponent;
 using MultipleChoice.Models;
 using MultipleChoice.Services;
 using System;
@@ -31,6 +31,8 @@ namespace MultipleChoice
             InitializeComponent();
             _user = _userService.GetById(MenuWindow.UserId);
             InitializeFetchingData();
+            List<dynamic> userAttempts = LoadUserAttemptInfo();
+            attemptsDataGrid.ItemsSource = userAttempts;
             UpdateAnalyzer();
         }
 
@@ -67,6 +69,26 @@ namespace MultipleChoice
         {
             TxtUsername.Text = _user.Username;
             TxtEmail.Text = _user.Email;
+        }
+
+        public List<dynamic> LoadUserAttemptInfo()
+        {
+            List<UserAttempt> userAttempts =  _attempServices.GetAttemptsByUserID(MenuWindow.UserId);
+            List<dynamic> newUserAttemps = new List<dynamic>();
+            foreach (var userAttempt in userAttempts)
+            {
+                var newUserAttempt = new
+                {
+                    userAttempt.Quizz,
+                    userAttempt.Score,
+                    userAttempt.Time,
+                    Date = userAttempt.StartAt.ToString("dd/MM/yyyy"),
+                    AtTime = userAttempt.StartAt.ToString("HH:mm"),
+                    userAttempt.IsCompleted,
+                };
+                newUserAttemps.Add(newUserAttempt);
+            }
+            return newUserAttemps;
         }
     }
 }

@@ -39,10 +39,60 @@ namespace MultipleChoice.Services
             }
                 catch (Exception ex)
                 {
-                return false;
+                    return false;
+                }
             }
         }
-        }
+        public List<AnswerResult> GetAnswers(int attemptId, int quizId)
+        {
+            List<AnswerResult> result = new List<AnswerResult>();
 
+            using (var conn = GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+
+                    // Câu lệnh SQL
+                    string sql = @"
+                    SELECT qd.id, qd.question, qd.answer1, qd.answer2, qd.answer3, qd.answer4, qd.correct_answer, a.answer
+                    FROM quizzdetails qd
+                    LEFT JOIN answers a ON qd.id = a.question_id AND a.attemp_id = @AttemptId
+                    WHERE qd.quizz_id = @QuizId";
+
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        // Thêm tham số vào câu lệnh SQL
+                        cmd.Parameters.AddWithValue("@AttemptId", attemptId);
+                        cmd.Parameters.AddWithValue("@QuizId", quizId);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var answerResult = new AnswerResult
+                                {
+                                    Question = reader.GetString("question"),
+                                    Answer1 = reader.GetString("answer1"),
+                                    Answer2 = reader.GetString("answer2"),
+                                    Answer3 = reader.GetString("answer3"),
+                                    Answer4 = reader.GetString("answer4"),
+                                    CorrectAnswer = reader.GetInt32("correct_answer"),
+                                    Answer = reader.IsDBNull(reader.GetOrdinal("answer")) ? null : reader.GetInt32("answer").ToString(),
+                                };
+
+                                result.Add(answerResult);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
+            }
+
+            return result;
+        }
     }
 }
