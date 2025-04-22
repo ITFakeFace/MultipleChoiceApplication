@@ -185,6 +185,99 @@ namespace MultipleChoice.Services
                 }
             }
         }
+        public List<Attemp> GetByUserId(int userId)
+        {
+            var result = new List<Attemp>();
+
+            using (var conn = GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+
+                    string sql = "SELECT * FROM attemps WHERE answered_by = @UserId";
+
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var attempt = new Attemp
+                                {
+                                    Id = reader.GetInt32("id"),
+                                    AnsweredBy = reader.GetInt32("answered_by"),
+                                    QuizzId = reader.GetInt32("quizz_id"),
+                                    CorrectNumber = reader.IsDBNull(reader.GetOrdinal("correct_number"))
+                                                    ? 0
+                                                    : reader.GetInt32("correct_number"),
+                                    Time = reader.GetTimeSpan("time"),
+                                    Complete = reader.GetBoolean("complete")
+                                };
+
+                                result.Add(attempt);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Ghi log nếu cần
+                }
+            }
+
+            return result;
+        }
+
+        public DetailsScore? GetDetailsScore(int attemptId)
+        {
+            using (var conn = GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+
+                    string sql = @"
+                SELECT 
+                    a.correct_number,
+                    (SELECT COUNT(*) 
+                     FROM quizzDetails qd 
+                     WHERE qd.quizz_id = a.quizz_id) AS total_questions
+                FROM attemps a
+                WHERE a.id = @AttemptId";
+
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@AttemptId", attemptId);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int correct = reader.GetInt32("correct_number");
+                                int total = reader.GetInt32("total_questions");
+
+                                return new DetailsScore
+                                {
+                                    CorrectNumber = correct,
+                                    TotalQuestion = total,
+                                    Score = total > 0 ? correct * 10 / total : 0
+                                };
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Ghi log nếu cần
+                }
+            }
+
+            return null;
+        }
+
 
         public int GetAttempsOfUserByQuizzId(int userId, int quizzId)
         {
