@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="HomePage"
     HorizontalAlignment="Center"
-    d:DesignHeight="1080"
+    d:DesignHeight="1010"
     d:DesignWidth="1700"
     mc:Ignorable="d">
 
@@ -15,6 +15,7 @@
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
 
             <WrapPanel
+                x:Name="ListQuizzCard"
                 Width="1680"
                 Margin="0,10,0,0"
                 HorizontalAlignment="Center"

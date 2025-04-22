@@ -90,7 +90,7 @@
                         Padding="10"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center">
+                        VerticalContentAlignment="Center" Click="BtnAccount_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="30" Text="👤" />
                             <TextBlock
@@ -125,7 +125,7 @@
 
         <!--  Main Content  -->
         <StackPanel Grid.Column="1" Orientation="Vertical">
-            <StackPanel Margin="10" Orientation="Horizontal">
+            <StackPanel Height="70" Orientation="Horizontal">
                 <Button
                     Background="Transparent"
                     BorderBrush="Transparent"
