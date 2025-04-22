@@ -24,18 +24,43 @@ namespace MultipleChoice
     public partial class AccountDetailPage : Page
     {
         private readonly UserService _userService = new UserService();
+        private readonly AttempServices _attempServices = new AttempServices();
         private User _user { get; set; }
         public AccountDetailPage()
         {
             InitializeComponent();
             _user = _userService.GetById(MenuWindow.UserId);
             InitializeFetchingData();
+            UpdateAnalyzer();
+        }
 
-
+        public void UpdateAnalyzer()
+        {
+            var attemps = _attempServices.GetByUserId(_user.Id);
+            List<DetailsScore> allAttemptsInfo = new List<DetailsScore>();
+            foreach (var attempt in attemps)
+            {
+                allAttemptsInfo.Add(_attempServices.GetDetailsScore(attempt.Id));
+            }
+            int low = 0, average = 0, good = 0, excellent = 0;
+            foreach (var attempt in allAttemptsInfo)
+            {
+                if (attempt.Score >= 8)
+                    excellent++;
+                else if (attempt.Score >= 6)
+                    good++;
+                else if (attempt.Score >= 3)
+                    average++;
+                else
+                    low++;
+            }
             QuizzAnalyzerUserControl analyzer = new QuizzAnalyzerUserControl();
-            analyzer.SetData(50, 10, 15, 5, 20); // 50 quiz với 4 mức độ
+            analyzer.SetData(allAttemptsInfo.Count, low, average, good, excellent); // 50 quiz với 4 mức độ
             AnalyzerBox.Children.Add(analyzer);
-
+            TxtExcellent.Text = excellent + "";
+            TxtGood.Text = good + "";
+            TxtAverage.Text = average + "";
+            TxtLow.Text = low + "";
         }
 
         public void InitializeFetchingData()
