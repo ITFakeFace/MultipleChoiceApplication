@@ -10,7 +10,92 @@ namespace MultipleChoice.Services
 {
     internal class AttempServices : BaseService
     {
+        public List<Attemp> GetByQuizzId(int quizzId)
+        {
+            var result = new List<Attemp>();
 
+            using (var conn = GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+
+                    string sql = "SELECT * FROM attemps WHERE quizz_id = @QuizzId";
+
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@QuizzId", quizzId);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var attempt = new Attemp
+                                {
+                                    Id = reader.GetInt32("id"),
+                                    AnsweredBy = reader.GetInt32("answered_by"),
+                                    QuizzId = reader.GetInt32("quizz_id"),
+                                    CorrectNumber = reader.IsDBNull(reader.GetOrdinal("correct_number"))
+                                                    ? 0
+                                                    : reader.GetInt32("correct_number"),
+                                    Time = reader.GetTimeSpan("time"),
+                                    Complete = reader.GetBoolean("complete")
+                                };
+
+                                result.Add(attempt);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log hoặc xử lý lỗi
+                }
+            }
+
+            return result;
+        }
+        public List<Attemp> GetAll()
+        {
+            var result = new List<Attemp>();
+
+            using (var conn = GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+
+                    string sql = "SELECT * FROM attemps";
+
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var attempt = new Attemp
+                            {
+                                Id = reader.GetInt32("id"),
+                                AnsweredBy = reader.GetInt32("answered_by"),
+                                QuizzId = reader.GetInt32("quizz_id"),
+                                CorrectNumber = reader.IsDBNull(reader.GetOrdinal("correct_number"))
+                                                ? 0
+                                                : reader.GetInt32("correct_number"),
+                                Time = reader.GetTimeSpan("time"),
+                                Complete = reader.GetBoolean("complete")
+                            };
+
+                            result.Add(attempt);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Xử lý hoặc log lỗi
+                }
+            }
+
+            return result;
+        }
         public int Create(Attemp attempt)
         {
             using (var conn = GetConnection())
@@ -129,5 +214,34 @@ namespace MultipleChoice.Services
             }
         }
 
+        public int GetTotalQuizzDetails(int userId, int quizzId)
+        {
+            using (var conn = GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+
+                    string sql = @"
+                SELECT COUNT(*) 
+                FROM attemps A 
+                JOIN quizzDetails QD ON A.quizz_id = QD.quizz_id 
+                WHERE A.answered_by = @UserId AND A.quizz_id = @QuizzId";
+
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        cmd.Parameters.AddWithValue("@QuizzId", quizzId);
+
+                        return Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Ghi log nếu cần
+                    return -1; // Trả về -1 nếu có lỗi
+                }
+            }
+        }
     }
 }

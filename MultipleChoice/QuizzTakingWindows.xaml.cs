@@ -128,8 +128,8 @@ namespace MultipleChoice
             _answerService.Create(answers);
 
             Window window = new AttemptResultWindow(attemptID, _menuWindow);
-            this.Hide();
             window.Show();
+            this.Close();
         }
         // Hàm chức năng
         private void InitializeQuestionChoice(int quizzDetailCount)

@@ -115,5 +115,32 @@ namespace MultipleChoice.Services
                 }
             }
         }
+        public int GetTotalQuizzDetails(int quizzId)
+        {
+            using (var conn = GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+
+                    string sql = @"
+                SELECT COUNT(*) 
+                FROM quizzDetails 
+                WHERE quizz_id = @QuizzId";
+
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@QuizzId", quizzId);
+
+                        return Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Ghi log nếu cần
+                    return -1; // Trả về -1 nếu có lỗi
+                }
+            }
+        }
     }
 }
