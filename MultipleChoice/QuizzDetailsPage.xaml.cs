@@ -279,6 +279,11 @@ namespace MultipleChoice
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            if (ListBoxDetails.SelectedValue == null)
+            {
+                MessageBox.Show("Error: Please choose question", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (InpQuestion.Text == string.Empty)
             {
                 MessageBox.Show("Error: Please input question", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

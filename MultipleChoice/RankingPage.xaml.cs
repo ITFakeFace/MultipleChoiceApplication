@@ -1,4 +1,5 @@
 ﻿using MultipleChoice.Models;
+using MultipleChoice.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,9 @@ namespace MultipleChoice
     public partial class RankingPage : Page
     {
         public int QuizzId { get; set; }
+        private readonly AttempServices _attempServices = new AttempServices();
+        private readonly UserService _userServices = new UserService();
+        private readonly QuizzDetailsService _quizzDetailsServices = new QuizzDetailsService();
         public RankingPage(int quizzId)
         {
             InitializeComponent();
@@ -33,6 +37,7 @@ namespace MultipleChoice
         public void UpdateRow()
         {
             List<Attemp> attemps = new List<Attemp>();
+            attemps = _attempServices.GetByQuizzId(QuizzId);
             // Clear tất cả Row cũ (trừ tiêu đề)
             while (RankingTableGrid.RowDefinitions.Count > 2)
             {
@@ -74,14 +79,40 @@ namespace MultipleChoice
             {
                 // Load dữ liệu thật
                 int rank = 1;
+                List<RankingModel> listRanking = new List<RankingModel>();
                 foreach (var item in attemps)
                 {
-                    //AddRankingRow(rank++, item.User?.Username ?? "Unknown", item.Score, item.CreatedAt?.ToString("HH:mm:ss") ?? "");
+                    var number = _attempServices.GetTotalQuizzDetails(item.AnsweredBy, QuizzId);
+                    listRanking.Add(new RankingModel
+                    {
+                        Id = item.AnsweredBy,
+                        Username = _userServices.GetById(item.AnsweredBy).Username,
+                        Score = (float)(item.CorrectNumber / (int)_quizzDetailsServices.GetTotalQuizzDetails(item.QuizzId)),
+                        Time = item.Time,
+                    });
+                }
+                for (int i = 0; i < listRanking.Count - 1; i++)
+                    for (int j = 1; j < listRanking.Count; j++)
+                        if (listRanking[i].Score < listRanking[j].Score)
+                        {
+                            var temp = listRanking[i];
+                            listRanking[i] = listRanking[j];
+                            listRanking[j] = temp;
+                        }
+                        else if (listRanking[i].Score == listRanking[j].Score && listRanking[i].Time > listRanking[j].Time)
+                        {
+                            var temp = listRanking[i];
+                            listRanking[i] = listRanking[j];
+                            listRanking[j] = temp;
+                        }
+                foreach (var item in listRanking)
+                {
+                    AddRankingRow(rank++, item.Username, item.Score, item.Time);
                 }
             }
         }
 
-        public void AddRankingRow(int rank, string username, int score, string time)
+        public void AddRankingRow(int rank, string username, float score, TimeSpan time)
         {
             int newRowIndex = RankingTableGrid.RowDefinitions.Count;
 
@@ -92,7 +123,7 @@ namespace MultipleChoice
             AddCellToGrid(RankingTableGrid, newRowIndex, 0, rank.ToString());
             AddCellToGrid(RankingTableGrid, newRowIndex, 1, username);
             AddCellToGrid(RankingTableGrid, newRowIndex, 2, score.ToString());
-            AddCellToGrid(RankingTableGrid, newRowIndex, 3, time);
+            AddCellToGrid(RankingTableGrid, newRowIndex, 3, time.ToString());
         }
 
         private void AddCellToGrid(Grid grid, int row, int column, string text)
