@@ -109,7 +109,7 @@
                         Padding="10"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center">
+                        VerticalContentAlignment="Center" Click="BtnLogout_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="30" Text="⬅️" />
                             <TextBlock

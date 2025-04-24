@@ -153,14 +153,16 @@
                         Height="50"
                         Margin="30,10"
                         Background="LightGreen"
+                        Click="BtnSave_Click"
                         Content="Save"
-                        FontSize="32" Click="BtnSave_Click" />
+                        FontSize="32" />
 
                     <Button
                         Width="200"
                         Height="50"
                         Margin="30,10"
                         Background="IndianRed"
+                        Click="Button_Click"
                         Content="Remove"
                         FontSize="32" />
                 </StackPanel>

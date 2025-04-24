@@ -91,6 +91,12 @@ namespace MultipleChoice
             InpAttempNumber.Foreground = Brushes.Black;
             InpAttempNumber.BorderBrush = Brushes.Black;
 
+            if (InpStartAt.Value >= InpEndAt.Value)
+            {
+                MessageBox.Show("Error: Start Time must be before end time", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var quizz = new Quizz
             {
                 Title = InpTitle.Text.Trim(),
@@ -123,8 +129,8 @@ namespace MultipleChoice
             InpTitle.Text = quizz.Title;
             CBoxTopic.Text = quizz.Type;
             InpTimeLimit.Value = quizz.TimeLimit.HasValue
-                ? DateTime.Today + quizz.TimeLimit.Value
-                : null;
+            ? DateTime.Today + quizz.TimeLimit.Value
+            : null;
             InpAttempNumber.Text = quizz.AttempNumber + "";
             CheckBoxRandomQuestion.IsChecked = quizz.IsRandom;
             CheckBoxShowResult.IsChecked = quizz.IsResultShowable;
@@ -211,6 +217,31 @@ namespace MultipleChoice
             var quizz = (Quizz)ListBoxQuestion.SelectedValue;
             var window = Window.GetWindow(this) as MenuWindow;
             window.MainFrame.Navigate(new QuizzDetailsPage(quizz.Id));
+        }
+
+        private void BtnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (ListBoxQuestion.SelectedValue == null)
+            {
+                MessageBox.Show("Error: Please choose quizz", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var quizz = (Quizz)ListBoxQuestion.SelectedValue;
+
+            MessageBoxResult result = MessageBox.Show(
+                $"Are you sure you want to delete the quiz: \"{quizz.Title}\"?",
+                "Confirm Delete",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning
+            );
+
+            if (result == MessageBoxResult.Yes)
+            {
+                _quizzService.Delete(quizz.Id);
+                MessageBox.Show("Quiz deleted successfully.", "Deleted", MessageBoxButton.OK, MessageBoxImage.Information);
+                ListBoxQuestion.UnselectAll();
+            }
         }
     }
 }

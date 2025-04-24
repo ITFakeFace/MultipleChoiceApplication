@@ -233,6 +233,7 @@
                         Height="50"
                         Margin="30,10"
                         Background="IndianRed"
+                        Click="BtnRemove_Click"
                         Content="Remove"
                         FontSize="32" />
                     <Button

@@ -101,7 +101,15 @@ namespace MultipleChoice
 
         private void BtnAccount_Click(object sender, RoutedEventArgs e)
         {
+            TxtPageTitle.Text = "Account Information";
             MainFrame.Navigate(_accountDetailPage);
+        }
+
+        private void BtnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow widnow = new MainWindow();
+            widnow.Show();
+            this.Close();
         }
     }
 }

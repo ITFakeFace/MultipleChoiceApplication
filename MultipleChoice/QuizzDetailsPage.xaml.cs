@@ -43,44 +43,44 @@ namespace MultipleChoice
                 return;
             }
             if ((InpAnswer1.Text == string.Empty && (bool)RadioAnswer1.IsChecked)
-                || (InpAnswer2.Text == string.Empty && (bool)RadioAnswer2.IsChecked)
-                || (InpAnswer3.Text == string.Empty && (bool)RadioAnswer3.IsChecked)
-                || (InpAnswer4.Text == string.Empty && (bool)RadioAnswer4.IsChecked))
+            || (InpAnswer2.Text == string.Empty && (bool)RadioAnswer2.IsChecked)
+            || (InpAnswer3.Text == string.Empty && (bool)RadioAnswer3.IsChecked)
+            || (InpAnswer4.Text == string.Empty && (bool)RadioAnswer4.IsChecked))
             {
                 MessageBox.Show("Error: The Correct Answer cannot be empty answer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (InpAnswer1.Text == string.Empty &&
-                InpAnswer2.Text == string.Empty &&
-                InpAnswer3.Text == string.Empty &&
-                InpAnswer4.Text == string.Empty)
+            InpAnswer2.Text == string.Empty &&
+            InpAnswer3.Text == string.Empty &&
+            InpAnswer4.Text == string.Empty)
             {
                 MessageBox.Show("Error: Please input answer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (!(bool)RadioAnswer1.IsChecked &&
-                !(bool)RadioAnswer2.IsChecked &&
-                !(bool)RadioAnswer3.IsChecked &&
-                !(bool)RadioAnswer4.IsChecked)
+            !(bool)RadioAnswer2.IsChecked &&
+            !(bool)RadioAnswer3.IsChecked &&
+            !(bool)RadioAnswer4.IsChecked)
             {
                 MessageBox.Show("Error: Please choose correct answer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             var answers = new List<string>
-            {
-                InpAnswer1.Text.Trim(),
-                InpAnswer2.Text.Trim(),
-                InpAnswer3.Text.Trim(),
-                InpAnswer4.Text.Trim()
-            };
+    {
+    InpAnswer1.Text.Trim(),
+    InpAnswer2.Text.Trim(),
+    InpAnswer3.Text.Trim(),
+    InpAnswer4.Text.Trim()
+    };
 
             var radios = new List<bool?>
-            {
-                RadioAnswer1.IsChecked,
-                RadioAnswer2.IsChecked,
-                RadioAnswer3.IsChecked,
-                RadioAnswer4.IsChecked
-            };
+    {
+    RadioAnswer1.IsChecked,
+    RadioAnswer2.IsChecked,
+    RadioAnswer3.IsChecked,
+    RadioAnswer4.IsChecked
+    };
 
             // Gom lại các answer không rỗng
             var nonEmptyAnswers = new List<(string Text, bool? IsChecked)>();
@@ -290,25 +290,25 @@ namespace MultipleChoice
                 return;
             }
             if ((InpAnswer1.Text == string.Empty && (bool)RadioAnswer1.IsChecked)
-                || (InpAnswer2.Text == string.Empty && (bool)RadioAnswer2.IsChecked)
-                || (InpAnswer3.Text == string.Empty && (bool)RadioAnswer3.IsChecked)
-                || (InpAnswer4.Text == string.Empty && (bool)RadioAnswer4.IsChecked))
+            || (InpAnswer2.Text == string.Empty && (bool)RadioAnswer2.IsChecked)
+            || (InpAnswer3.Text == string.Empty && (bool)RadioAnswer3.IsChecked)
+            || (InpAnswer4.Text == string.Empty && (bool)RadioAnswer4.IsChecked))
             {
                 MessageBox.Show("Error: The Correct Answer cannot be empty answer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (InpAnswer1.Text == string.Empty &&
-                InpAnswer2.Text == string.Empty &&
-                InpAnswer3.Text == string.Empty &&
-                InpAnswer4.Text == string.Empty)
+            InpAnswer2.Text == string.Empty &&
+            InpAnswer3.Text == string.Empty &&
+            InpAnswer4.Text == string.Empty)
             {
                 MessageBox.Show("Error: Please input answer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (!(bool)RadioAnswer1.IsChecked &&
-                !(bool)RadioAnswer2.IsChecked &&
-                !(bool)RadioAnswer3.IsChecked &&
-                !(bool)RadioAnswer4.IsChecked)
+            !(bool)RadioAnswer2.IsChecked &&
+            !(bool)RadioAnswer3.IsChecked &&
+            !(bool)RadioAnswer4.IsChecked)
             {
                 MessageBox.Show("Error: Please choose correct answer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -317,20 +317,20 @@ namespace MultipleChoice
             MessageBox.Show("After Validation", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
             var answers = new List<string>
-            {
-                InpAnswer1.Text.Trim(),
-                InpAnswer2.Text.Trim(),
-                InpAnswer3.Text.Trim(),
-                InpAnswer4.Text.Trim()
-            };
+                                            {
+                                            InpAnswer1.Text.Trim(),
+                                            InpAnswer2.Text.Trim(),
+                                            InpAnswer3.Text.Trim(),
+                                            InpAnswer4.Text.Trim()
+                                            };
 
             var radios = new List<bool?>
-            {
-                RadioAnswer1.IsChecked,
-                RadioAnswer2.IsChecked,
-                RadioAnswer3.IsChecked,
-                RadioAnswer4.IsChecked
-            };
+                                            {
+                                            RadioAnswer1.IsChecked,
+                                            RadioAnswer2.IsChecked,
+                                            RadioAnswer3.IsChecked,
+                                            RadioAnswer4.IsChecked
+                                            };
 
             // Gom lại các answer không rỗng
             var nonEmptyAnswers = new List<(string Text, bool? IsChecked)>();
@@ -378,6 +378,27 @@ namespace MultipleChoice
             MessageBox.Show("Success: Sucessfully create new question", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             UpdateListBoxDetails();
             ListBoxDetails.UnselectAll();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (ListBoxDetails.SelectedValue == null)
+            {
+                return;
+            }
+            var quizzDetails = (QuizzDetails)ListBoxDetails.SelectedValue;
+            MessageBoxResult result = MessageBox.Show(
+                $"Are you sure you want to delete the quiz: \"{quizzDetails.Question}\"?",
+                "Confirm Delete",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning
+            );
+
+            if (result == MessageBoxResult.Yes)
+            {
+                _quizzDetailsService.Delete(quizzDetails.Id);
+                MessageBox.Show("Quiz deleted successfully.", "Deleted", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }
